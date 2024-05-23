@@ -1,11 +1,8 @@
-using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEditor;
+using System.Linq;
 
-[CustomEditor(typeof(FSMExample))]
-public class StateMachineEditor : Editor
+[CustomEditor(typeof(GameManager))]
+public class GameManagerEditor : Editor
 {
     public bool showFoldout;
 
@@ -13,7 +10,7 @@ public class StateMachineEditor : Editor
     {
         base.OnInspectorGUI();
 
-        FSMExample fsm = (FSMExample)target;
+        GameManager fsm = (GameManager)target;
 
         EditorGUILayout.Space(30);
         EditorGUILayout.LabelField("State Machine");
