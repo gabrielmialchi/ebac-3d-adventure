@@ -41,12 +41,22 @@ public class PlayerAbilityShoot : PlayerAbilityBase
     {
         if (Input.GetKeyDown(gun1Key))
         {
+            if (gunBase != null)
+            {
+                _currentGun.gameObject.SetActive(false);
+            }
             gunBase = listOfGuns[0];
+            _currentGun = Instantiate(gunBase, gunPosition);
         }
 
         if (Input.GetKeyDown(gun2Key))
         {
+            if (gunBase != null)
+            {
+                _currentGun.gameObject.SetActive(false);
+            }
             gunBase = listOfGuns[1];
+            _currentGun = Instantiate(gunBase, gunPosition);
         }
     }
 
