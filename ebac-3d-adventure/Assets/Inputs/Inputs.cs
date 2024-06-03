@@ -25,17 +25,55 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""GunShootLimit"",
+                    ""type"": ""Button"",
+                    ""id"": ""08d6c1df-8394-4cde-b4c8-394bee3ada69"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""GunAngle"",
+                    ""type"": ""Button"",
+                    ""id"": ""cd5cd719-4315-4003-9232-db6c621d98e0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""8be1fcbb-ce87-45ed-a598-7da195124e62"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Keyboard>/x"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""02620e88-3da8-43b0-9c33-8192b22e7665"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": ""Tap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GunShootLimit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""de210755-6a41-467a-bfba-42305416a684"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": ""Tap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GunAngle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -47,6 +85,8 @@ public class @Inputs : IInputActionCollection, IDisposable
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Shoot = m_Gameplay.FindAction("Shoot", throwIfNotFound: true);
+        m_Gameplay_GunShootLimit = m_Gameplay.FindAction("GunShootLimit", throwIfNotFound: true);
+        m_Gameplay_GunAngle = m_Gameplay.FindAction("GunAngle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -97,11 +137,15 @@ public class @Inputs : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Gameplay;
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Shoot;
+    private readonly InputAction m_Gameplay_GunShootLimit;
+    private readonly InputAction m_Gameplay_GunAngle;
     public struct GameplayActions
     {
         private @Inputs m_Wrapper;
         public GameplayActions(@Inputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Shoot => m_Wrapper.m_Gameplay_Shoot;
+        public InputAction @GunShootLimit => m_Wrapper.m_Gameplay_GunShootLimit;
+        public InputAction @GunAngle => m_Wrapper.m_Gameplay_GunAngle;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -114,6 +158,12 @@ public class @Inputs : IInputActionCollection, IDisposable
                 @Shoot.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShoot;
+                @GunShootLimit.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGunShootLimit;
+                @GunShootLimit.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGunShootLimit;
+                @GunShootLimit.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGunShootLimit;
+                @GunAngle.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGunAngle;
+                @GunAngle.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGunAngle;
+                @GunAngle.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGunAngle;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -121,6 +171,12 @@ public class @Inputs : IInputActionCollection, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @GunShootLimit.started += instance.OnGunShootLimit;
+                @GunShootLimit.performed += instance.OnGunShootLimit;
+                @GunShootLimit.canceled += instance.OnGunShootLimit;
+                @GunAngle.started += instance.OnGunAngle;
+                @GunAngle.performed += instance.OnGunAngle;
+                @GunAngle.canceled += instance.OnGunAngle;
             }
         }
     }
@@ -128,5 +184,7 @@ public class @Inputs : IInputActionCollection, IDisposable
     public interface IGameplayActions
     {
         void OnShoot(InputAction.CallbackContext context);
+        void OnGunShootLimit(InputAction.CallbackContext context);
+        void OnGunAngle(InputAction.CallbackContext context);
     }
 }

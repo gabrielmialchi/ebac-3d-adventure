@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class GunBase : MonoBehaviour
 {
-
     public ProjectileBase prefabProjectile;
 
     public Transform positionToShoot;
     public float attackSpeed = .3f;
+    public float speed = 50f;
 
     private Coroutine _currentCoroutine;
 
-    IEnumerator ShootCoroutine()
+    protected virtual IEnumerator ShootCoroutine()
     {
         while (true)
         {
@@ -21,11 +21,12 @@ public class GunBase : MonoBehaviour
         }
     }
 
-    private void Shoot()
+    public virtual void Shoot()
     {
         var projectile = Instantiate(prefabProjectile);
         projectile.transform.position = positionToShoot.position;
         projectile.transform.rotation = positionToShoot.rotation;
+        projectile.projectileSpeed = speed;
     }
 
     public void StartShoot()
