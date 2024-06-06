@@ -27,7 +27,7 @@ public class PlayerAbilityShoot : PlayerAbilityBase
 
     private void Update()
     {
-        ChangeGun();
+        //ChangeGun();
     }
 
     private void CreateGun()

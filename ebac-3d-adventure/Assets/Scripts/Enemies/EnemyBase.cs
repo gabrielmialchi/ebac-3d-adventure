@@ -2,20 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Animation;
 
 namespace Enemy
 {
-    public class EnemyBase : MonoBehaviour
+    public class EnemyBase : MonoBehaviour, IDamageable
     {
+        public Collider enemyCollider;
+
+        public FlashColor flashColor;
+
+        public ParticleSystem damageParticleSystem;
+
         public int startLife = 10;
         public int maxLife = 100;
 
         [SerializeField] private int _currentLife;
 
-        [Header("Start Animation")]
-        public float startAnimationDuration = .2f;
-        public Ease startAnimationEase = Ease.OutBack;
+        [Header("Animation")]
+        [SerializeField] private AnimationBase _animationBase;
+
+        [Header("Spawn Animation")]
+        public float spawnAnimationDuration = .2f;
+        public Ease spawnAnimationEase = Ease.OutBack;
         public bool startWithSpawnAnimation = true;
+
+        [SerializeField] private float _delayToDestroy = 3f;
 
         private void Awake()
         {
@@ -40,11 +52,16 @@ namespace Enemy
 
         protected virtual void OnKill()
         {
-            Destroy(gameObject);
+            if (enemyCollider != null) enemyCollider.enabled = false;
+            Destroy(gameObject, _delayToDestroy);
+            PlayAnimationByTrigger(AnimationType.DEATH);
         }
 
         public void OnDamage(int damage)
         {
+            if (flashColor != null) flashColor.Flash();
+            if(damageParticleSystem != null) damageParticleSystem.Play();
+
             _currentLife -= damage;
 
             if (_currentLife <= 0)
@@ -56,9 +73,13 @@ namespace Enemy
         #region ANIMATIONS
         private void SpawnAnimation()
         {
-            transform.DOScale(0, startAnimationDuration).SetEase(startAnimationEase).From();
+            transform.DOScale(0, spawnAnimationDuration).SetEase(spawnAnimationEase).From();
         }
 
+        public void PlayAnimationByTrigger(AnimationType animationType)
+        {
+            _animationBase.PlayAnimationByTrigger(animationType);
+        }
 
         #endregion
 
@@ -69,6 +90,12 @@ namespace Enemy
             {
                 OnDamage(1);
             }
+        }
+
+        public void Damage(int damage)
+        {
+            Debug.Log("Damage");
+            OnDamage(damage);
         }
     }
 }
