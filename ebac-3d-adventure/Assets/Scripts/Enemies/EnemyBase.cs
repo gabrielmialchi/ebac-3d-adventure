@@ -17,7 +17,9 @@ namespace Enemy
         public int startLife = 10;
         public int maxLife = 100;
 
-        [SerializeField] private int _currentLife;
+        public int _currentLife;
+
+        public bool lookAtPlayer = false;
 
         [Header("Animation")]
         [SerializeField] private AnimationBase _animationBase;
@@ -29,9 +31,16 @@ namespace Enemy
 
         [SerializeField] private float _delayToDestroy = 3f;
 
+        private PlayerBase _player;
+
         private void Awake()
         {
             Init();
+        }
+
+        private void Start()
+        {
+            _player = GameObject.FindObjectOfType<PlayerBase>();
         }
 
         protected virtual void Init()
@@ -60,7 +69,9 @@ namespace Enemy
         public void OnDamage(int damage)
         {
             if (flashColor != null) flashColor.Flash();
-            if(damageParticleSystem != null) damageParticleSystem.Play();
+            if (damageParticleSystem != null) damageParticleSystem.Play();
+
+            //transform.position -= transform.forward;
 
             _currentLife -= damage;
 
@@ -84,18 +95,38 @@ namespace Enemy
         #endregion
 
         // debug
-        private void Update()
+        public virtual void Update()
         {
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                OnDamage(1);
-            }
+            LookAtPlayer();
         }
 
         public void Damage(int damage)
         {
-            Debug.Log("Damage");
             OnDamage(damage);
+        }
+
+        public void Damage(int damage, Vector3 direction)
+        {
+            OnDamage(damage);
+            transform.DOMove(transform.position - direction, .1f);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            PlayerBase player = collision.transform.GetComponent<PlayerBase>();
+
+            if (player != null)
+            {
+                player.Damage(1);
+            }
+        }
+
+        public void LookAtPlayer()
+        {
+            if (lookAtPlayer)
+            {
+                transform.LookAt(_player.transform.position);
+            }
         }
     }
 }

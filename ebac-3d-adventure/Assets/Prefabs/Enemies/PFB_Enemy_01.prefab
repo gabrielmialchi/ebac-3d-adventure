@@ -44,9 +44,10 @@ GameObject:
   - component: {fileID: 4300936648595177932}
   - component: {fileID: 6421828143660738202}
   - component: {fileID: 7478128891666397875}
+  - component: {fileID: 6157345480819065280}
   m_Layer: 0
   m_Name: PFB_Enemy_01
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -139,10 +140,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 3573642334411635071}
+  skinnedMeshRenderer: {fileID: 0}
   takeDamageColor: {r: 1, g: 0, b: 0, a: 1}
   flashDuration: 0.1
   loopType: 1
   loops: 2
+--- !u!54 &6157345480819065280
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8806734155798311832}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1001 &2440424893966002038
 PrefabInstance:
   m_ObjectHideFlags: 0

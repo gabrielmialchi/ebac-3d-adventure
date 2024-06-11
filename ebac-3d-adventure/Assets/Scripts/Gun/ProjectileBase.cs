@@ -10,6 +10,8 @@ public class ProjectileBase : MonoBehaviour
 
     public float projectileSpeed = 50f;
 
+    public List<string> tagsToHit;
+
     private void Awake()
     {
         Destroy(gameObject, timeToDestroy);
@@ -22,9 +24,24 @@ public class ProjectileBase : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        var damageable = collision.transform.GetComponent<IDamageable>();
+        foreach (var t in tagsToHit)
+        {
+            if (collision.transform.tag == t)
+            {
+                var damageable = collision.transform.GetComponent<IDamageable>();
 
-        if (damageable != null) damageable.Damage(damageAmount);
+                if (damageable != null)
+                {
+                    Vector3 direction = collision.transform.position - transform.position;
+                    direction = -direction.normalized;
+                    direction.y = 0;
+
+                    damageable.Damage(damageAmount, direction);
+                }
+
+                break;
+            }
+        }
 
         Destroy(gameObject);
     }

@@ -40,13 +40,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8806734155798311838}
-  - component: {fileID: 8806734155798311839}
   - component: {fileID: 3848260447197938722}
   - component: {fileID: 1269434052726749673}
   - component: {fileID: 3395509227610705171}
+  - component: {fileID: 1788591592171972644}
+  - component: {fileID: 7132145408677146950}
   m_Layer: 0
   m_Name: PFB_Enemy_02
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,29 +68,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8806734155798311839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8806734155798311832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 122324293876123429ffd6cae9f7ea99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyCollider: {fileID: 3848260447197938722}
-  flashColor: {fileID: 3395509227610705171}
-  damageParticleSystem: {fileID: 7739938399225346799}
-  startLife: 15
-  maxLife: 100
-  _currentLife: 0
-  _animationBase: {fileID: 1269434052726749673}
-  spawnAnimationDuration: 0.2
-  spawnAnimationEase: 27
-  startWithSpawnAnimation: 1
-  _delayToDestroy: 3
 --- !u!136 &3848260447197938722
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -139,10 +117,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshRenderer: {fileID: 7143555029475371649}
+  skinnedMeshRenderer: {fileID: 0}
   takeDamageColor: {r: 1, g: 1, b: 1, a: 1}
   flashDuration: 0.1
   loopType: 1
   loops: 2
+--- !u!114 &1788591592171972644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8806734155798311832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7cba5190fe299b4ab65d26cfeccbe38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyCollider: {fileID: 3848260447197938722}
+  flashColor: {fileID: 3395509227610705171}
+  damageParticleSystem: {fileID: 7739938399225346799}
+  startLife: 10
+  maxLife: 100
+  _currentLife: 2
+  _animationBase: {fileID: 1269434052726749673}
+  spawnAnimationDuration: 0.2
+  spawnAnimationEase: 27
+  startWithSpawnAnimation: 1
+  _delayToDestroy: 3
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  minDistance: 1
+  speed: 10
+--- !u!54 &7132145408677146950
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8806734155798311832}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1001 &2613618476328025926
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -168,19 +193,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6281779893053664936, guid: 8bec79f815163ae43b0faf61a3b8baca, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6281779893053664936, guid: 8bec79f815163ae43b0faf61a3b8baca, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6281779893053664936, guid: 8bec79f815163ae43b0faf61a3b8baca, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6281779893053664936, guid: 8bec79f815163ae43b0faf61a3b8baca, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6281779893053664936, guid: 8bec79f815163ae43b0faf61a3b8baca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -188,7 +213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6281779893053664936, guid: 8bec79f815163ae43b0faf61a3b8baca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 6281779893053664936, guid: 8bec79f815163ae43b0faf61a3b8baca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
