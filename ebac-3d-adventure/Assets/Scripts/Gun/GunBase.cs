@@ -11,10 +11,11 @@ public class GunBase : MonoBehaviour
     public float speed = 50f;
 
     private Coroutine _currentCoroutine;
+    private bool isShooting = false;
 
     protected virtual IEnumerator ShootCoroutine()
     {
-        while (true)
+        while (isShooting)
         {
             Shoot();
             yield return new WaitForSeconds(attackSpeed);
@@ -31,12 +32,17 @@ public class GunBase : MonoBehaviour
 
     public void StartShoot()
     {
-        StopShoot();
-        _currentCoroutine = StartCoroutine(ShootCoroutine());
+        //StopShoot();
+        if (!isShooting)
+        {
+            isShooting = true;
+            _currentCoroutine = StartCoroutine(ShootCoroutine());
+        }
     }
 
     public void StopShoot()
     {
+        isShooting = false;
         if (_currentCoroutine != null)
         {
             StopCoroutine(_currentCoroutine);
