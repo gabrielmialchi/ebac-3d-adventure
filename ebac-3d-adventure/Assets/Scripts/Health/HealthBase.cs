@@ -33,7 +33,7 @@ public class HealthBase : MonoBehaviour
         _currentLife = startLife;
     }
 
-    protected virtual void Kill()
+    public virtual void Kill()
     {
         if (destroyOnKill)
             Destroy(gameObject, _delayToDestroy);

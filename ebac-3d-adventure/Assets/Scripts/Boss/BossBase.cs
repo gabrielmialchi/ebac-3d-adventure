@@ -16,7 +16,7 @@ namespace Boss
         DEATH
     }
 
-    public class BossBase : MonoBehaviour
+    public class BossBase : MonoBehaviour, IDamageable
     {
         [Header("Animation")]
         public float startAnimationDuration = .5f;
@@ -27,15 +27,22 @@ namespace Boss
         [Header("Attack")]
         public int attackAmount = 5;
         public float attackSpeed = .5f;
+        private bool _isPlayerInAttackRange = false;
 
         public float speed = 10f;
         public List<Transform> waypoints;
 
         public HealthBase healthBase;
+        public SphereCollider attackAreaCollider;
+        public GameObject player;
+        public GunBase gunbase;
+        public FlashColor flashColor;
+        public ParticleSystem damageParticleSystem;
 
-        public SphereCollider attackArea;
+
 
         private StateMachine<BossAction> stateMachine;
+
 
         private void Awake()
         {
@@ -45,12 +52,7 @@ namespace Boss
 
         private void Update()
         {
-            
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            //Init();
+            BossAttack();
         }
 
         private void Init()
@@ -73,7 +75,6 @@ namespace Boss
 
 
         #region ATTACK
-
         public void StartAttack(Action endCallback = null)
         {
             StartCoroutine(AttackCoroutine(endCallback));
@@ -90,6 +91,36 @@ namespace Boss
             }
 
             endCallback?.Invoke();
+        }
+
+        public void BossAttack()
+        {
+            if (_isPlayerInAttackRange)
+            {
+                gunbase.StartShoot();
+            }
+            else
+            {
+                gunbase.StopShoot();
+            }
+        }
+
+        private void OnTriggerEnter(Collider collider)
+        {
+            if (collider.gameObject == player)
+            {
+                _isPlayerInAttackRange = true;
+                //StartInitAnimation();
+
+            }
+        }
+
+        private void OnTriggerExit(Collider collider)
+        {
+            if (collider.gameObject == player)
+            {
+                _isPlayerInAttackRange = false;
+            }
         }
         #endregion
 
@@ -119,6 +150,34 @@ namespace Boss
             transform.DOScale(0, startAnimationDuration).SetEase(startAnimationEase).From();
         }
 
+        #endregion
+
+        #region HEALTH
+        public void OnDamage(int damage)
+        {
+            if (flashColor != null) flashColor.Flash();
+            if (damageParticleSystem != null) damageParticleSystem.Play();
+
+            //transform.position -= transform.forward;
+
+            healthBase._currentLife -= damage;
+
+            if (healthBase._currentLife <= 0)
+            {
+                healthBase.Kill();
+            }
+        }
+
+        public void Damage(int damage)
+        {
+            OnDamage(damage);
+        }
+
+        public void Damage(int damage, Vector3 direction)
+        {
+            OnDamage(damage);
+            transform.DOMove(transform.position - direction, .1f);
+        }
         #endregion
 
         #region DEBUG
@@ -155,8 +214,6 @@ namespace Boss
         {
             stateMachine.SwitchState(state, this);
         }
-
-
         #endregion
 
     }
