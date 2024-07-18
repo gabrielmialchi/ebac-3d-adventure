@@ -5,6 +5,7 @@ public class PlayerBase : MonoBehaviour, IDamageable
 {
     public CharacterController characterController;
     public Animator animator;
+    public HealthBase health;
 
     public float speed = 1f;
     public float turnSpeed = 1f;
@@ -63,6 +64,20 @@ public class PlayerBase : MonoBehaviour, IDamageable
 
 
     #region LIFE
+    public void OnDamage(int damage)
+    {
+        //if (flashColors != null) flashColors.Flash();
+        //if (damageParticleSystem != null) damageParticleSystem.Play();
+
+        //transform.position -= transform.forward;
+        health._currentLife -= damage;
+
+        if (health._currentLife <= 0)
+        {
+            health.Kill();
+        }
+    }
+
     public void Damage(int damage)
     {
         flashColors.ForEach(i => i.Flash());
@@ -72,6 +87,5 @@ public class PlayerBase : MonoBehaviour, IDamageable
     {
         Damage(damage);
     }
-
     #endregion
 }

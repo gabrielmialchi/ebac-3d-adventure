@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ebac.StateMachine;
 using DG.Tweening;
+//using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace Boss
 {
@@ -23,26 +24,23 @@ namespace Boss
         public Ease startAnimationEase = Ease.OutBack;
         public bool startWithSpawnAnimation = true;
 
-
         [Header("Attack")]
         public int attackAmount = 5;
         public float attackSpeed = .5f;
         private bool _isPlayerInAttackRange = false;
+        public bool lookAtPlayer;
 
         public float speed = 10f;
         public List<Transform> waypoints;
 
         public HealthBase healthBase;
-        public SphereCollider attackAreaCollider;
+        public Collider attackAreaCollider;
         public GameObject player;
         public GunBase gunbase;
         public FlashColor flashColor;
         public ParticleSystem damageParticleSystem;
 
-
-
         private StateMachine<BossAction> stateMachine;
-
 
         private void Awake()
         {
@@ -53,6 +51,7 @@ namespace Boss
         private void Update()
         {
             BossAttack();
+            LookAtPlayer();
         }
 
         private void Init()
@@ -72,7 +71,6 @@ namespace Boss
         {
             SwitchState(BossAction.DEATH);
         }
-
 
         #region ATTACK
         public void StartAttack(Action endCallback = null)
@@ -104,14 +102,12 @@ namespace Boss
                 gunbase.StopShoot();
             }
         }
-
         private void OnTriggerEnter(Collider collider)
         {
             if (collider.gameObject == player)
             {
                 _isPlayerInAttackRange = true;
                 //StartInitAnimation();
-
             }
         }
 
@@ -122,10 +118,17 @@ namespace Boss
                 _isPlayerInAttackRange = false;
             }
         }
+
+        public void LookAtPlayer()
+        {
+            if (lookAtPlayer)
+            {
+                transform.LookAt(player.transform.position);
+            }
+        }
         #endregion
 
         #region WALK
-
         public void GoToRandomPoints(Action onArrive = null)
         {
             StartCoroutine(GoToPointCoroutine(waypoints[UnityEngine.Random.Range(0, waypoints.Count)], onArrive));
@@ -140,16 +143,15 @@ namespace Boss
             }
             onArrive?.Invoke();
         }
-
         #endregion
 
         #region ANIMATION
-
         public void StartInitAnimation()
         {
-            transform.DOScale(0, startAnimationDuration).SetEase(startAnimationEase).From();
-        }
+            transform.DOScale(1, startAnimationDuration).SetEase(startAnimationEase);
 
+            //transform.DOScale(1, startAnimationDuration).SetEase(startAnimationEase).OnComplete(() => stateMachine.SwitchState(BossAction.WALK));
+        }
         #endregion
 
         #region HEALTH
@@ -181,7 +183,6 @@ namespace Boss
         #endregion
 
         #region DEBUG
-
         [NaughtyAttributes.Button]
         private void SwitchInit()
         {
@@ -205,16 +206,13 @@ namespace Boss
         {
             SwitchState(BossAction.ATTACK);
         }
-
         #endregion
 
         #region STATE MACHINE
-
         public void SwitchState(BossAction state)
         {
             stateMachine.SwitchState(state, this);
         }
         #endregion
-
     }
 }

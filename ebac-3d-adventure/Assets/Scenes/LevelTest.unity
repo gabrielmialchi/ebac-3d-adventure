@@ -616,7 +616,7 @@ Transform:
   - {fileID: 2032730625}
   - {fileID: 2143089016}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &275010810
 PrefabInstance:
@@ -1433,7 +1433,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7609654344441706805, guid: 9755b2208447daf47adc44636991a47d, type: 3}
   m_PrefabInstance: {fileID: 2113778462}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2038491854}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 954854eaa70551e4bb2279feb0fceed2, type: 3}
@@ -1968,7 +1968,7 @@ Transform:
   - {fileID: 421371378}
   - {fileID: 1483077578}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1268801899
 PrefabInstance:
@@ -2489,6 +2489,65 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 389288316839002207, guid: 5530aaddfe55de5489d8221bbcb7b6c9, type: 3}
   m_PrefabInstance: {fileID: 1329729100}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1542641669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1542641672}
+  - component: {fileID: 1542641671}
+  - component: {fileID: 1542641670}
+  m_Layer: 0
+  m_Name: BossTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1542641670
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542641669}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 60, y: 22.5, z: 84.4}
+  m_Center: {x: 0, y: -0.35, z: 0}
+--- !u!114 &1542641671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542641669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34c40b42fa2203a43980c87c45bf8ec5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bossParent: {fileID: 2038491854}
+  _tagToCompare: Player
+--- !u!4 &1542641672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1542641669}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 29.3, y: -6.3, z: 59.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1571905891
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2866,7 +2925,7 @@ Transform:
   - {fileID: 1268801900}
   - {fileID: 2131104999}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1742913708 stripped
 Transform:
@@ -3388,6 +3447,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2038491854 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8806734155798311832, guid: 9755b2208447daf47adc44636991a47d, type: 3}
+  m_PrefabInstance: {fileID: 2113778462}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2113778462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3398,6 +3462,10 @@ PrefabInstance:
     - target: {fileID: 851766418782998948, guid: 9755b2208447daf47adc44636991a47d, type: 3}
       propertyPath: destroyOnKill
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 952344769977097714, guid: 9755b2208447daf47adc44636991a47d, type: 3}
+      propertyPath: m_Radius
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 3024569288035686381, guid: 9755b2208447daf47adc44636991a47d, type: 3}
       propertyPath: player
@@ -3415,6 +3483,10 @@ PrefabInstance:
       propertyPath: flashColor
       value: 
       objectReference: {fileID: 816001892}
+    - target: {fileID: 8313366794713955038, guid: 9755b2208447daf47adc44636991a47d, type: 3}
+      propertyPath: lookAtPlayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8313366794713955038, guid: 9755b2208447daf47adc44636991a47d, type: 3}
       propertyPath: attackAreaCollider
       value: 

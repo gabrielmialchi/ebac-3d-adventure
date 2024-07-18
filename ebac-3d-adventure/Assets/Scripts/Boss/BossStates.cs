@@ -31,7 +31,7 @@ namespace Boss
         public override void OnStateEnter(params object[] objs)
         {
             base.OnStateEnter(objs);
-            boss.GoToRandomPoints(OnArrive); ;
+            boss.GoToRandomPoints(OnArrive);
         }
 
         private void OnArrive()
