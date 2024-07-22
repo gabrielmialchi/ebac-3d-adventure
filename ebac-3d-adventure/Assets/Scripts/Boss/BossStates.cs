@@ -22,6 +22,7 @@ namespace Boss
         {
             base.OnStateEnter(objs);
             boss.StartInitAnimation();
+            boss.SwitchState(BossAction.WALK);
         }
     }
 
