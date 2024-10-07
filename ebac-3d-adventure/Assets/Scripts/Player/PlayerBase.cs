@@ -1,20 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBase : MonoBehaviour, IDamageable
+public class PlayerBase : MonoBehaviour//, IDamageable
 {
+    //references
     public CharacterController characterController;
     public Animator animator;
     public HealthBase health;
 
+    //publics
     public float speed = 1f;
     public float turnSpeed = 1f;
     public float gravity = -9.8f;
     public float jumpSpeed = 15f;
+    public float timeToRevive = 3f;
 
     public KeyCode jumpKeyCode = KeyCode.Space;
-
-    private float vSpeed = 0f;
 
     [Header("Run Setup")]
     public KeyCode runKeyCode = KeyCode.LeftShift;
@@ -22,6 +23,25 @@ public class PlayerBase : MonoBehaviour, IDamageable
 
     [Header("Damage")]
     public List<FlashColor> flashColors;
+    public List<Collider> colliders;
+
+
+    //privates
+    private float vSpeed = 0f;
+    private bool _isAlive = true;
+
+    private void OnValidate()
+    {
+        if (health == null) health = GetComponent<HealthBase>();
+    }
+
+    private void Awake()
+    {
+        OnValidate();
+
+        health.OnDamageAction += Damage;
+        health.OnKillAction += OnKill;
+    }
 
     private void Update()
     {
@@ -66,10 +86,6 @@ public class PlayerBase : MonoBehaviour, IDamageable
     #region LIFE
     public void OnDamage(int damage)
     {
-        //if (flashColors != null) flashColors.Flash();
-        //if (damageParticleSystem != null) damageParticleSystem.Play();
-
-        //transform.position -= transform.forward;
         health._currentLife -= damage;
 
         if (health._currentLife <= 0)
@@ -78,14 +94,44 @@ public class PlayerBase : MonoBehaviour, IDamageable
         }
     }
 
-    public void Damage(int damage)
+    public void Damage(HealthBase h)
     {
         flashColors.ForEach(i => i.Flash());
     }
 
     public void Damage(int damage, Vector3 direction)
     {
-        Damage(damage);
+        //Damage(damage);
+    }
+
+    private void OnKill(HealthBase h)
+    {
+        if (_isAlive)
+        {
+            _isAlive = false;
+            animator.SetTrigger("Death");
+            colliders.ForEach(i => i.enabled = false);
+
+            Invoke(nameof(Revive), timeToRevive);
+        }
+    }
+
+    private void Revive()
+    {
+        _isAlive = true;
+        health.ResetLife();
+        animator.SetTrigger("Revive");
+        Respawn();
+        colliders.ForEach(i => i.enabled = true);
     }
     #endregion
+
+    [NaughtyAttributes.Button]
+    public void Respawn()
+    {
+        if (CheckpointManager.Instance.HasCheckpoint())
+        {
+            transform.position = CheckpointManager.Instance.GetLastCheckpointRespawnPosition();
+        }
+    }
 }

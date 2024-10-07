@@ -5,8 +5,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthBase : MonoBehaviour
+public class HealthBase : MonoBehaviour, IDamageable
 {
+    public List<UIFillUpdater> uiHealthUpdater;
+
     public int _currentLife;
     public int startLife = 10;
     public int maxLife = 100;
@@ -28,7 +30,7 @@ public class HealthBase : MonoBehaviour
         ResetLife();
     }
 
-    protected virtual void ResetLife()
+    public virtual void ResetLife()
     {
         _currentLife = startLife;
     }
@@ -55,8 +57,20 @@ public class HealthBase : MonoBehaviour
         {
             Kill();
         }
-
+        UpdateUI();
         OnDamageAction?.Invoke(this);
     }
 
+    public void Damage(int damage, Vector3 direction)
+    {
+        Damage(damage);
+    }
+
+    private void UpdateUI()
+    {
+        if(uiHealthUpdater != null)
+        {
+            uiHealthUpdater.ForEach(i => i.UpdateValue((float) _currentLife/startLife));
+        }
+    }
 }

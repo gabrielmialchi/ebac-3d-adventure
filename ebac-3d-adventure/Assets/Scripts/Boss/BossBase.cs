@@ -27,8 +27,8 @@ namespace Boss
         [Header("Attack")]
         public int attackAmount = 5;
         public float attackSpeed = .5f;
-        private bool _isPlayerInAttackRange = false;
         public bool lookAtPlayer;
+        private bool _isPlayerInAttackRange = false;
 
         public float speed = 10f;
         public List<Transform> waypoints;
@@ -42,10 +42,17 @@ namespace Boss
 
         private StateMachine<BossAction> stateMachine;
 
+        private void OnValidate()
+        {
+            if (healthBase == null) healthBase = GetComponent<HealthBase>();
+        }
+
         private void Awake()
         {
+            OnValidate();
             Init();
             healthBase.OnKillAction += OnBossKill;
+            //healthBase.OnDamageAction += Damage;
         }
 
         private void Update()

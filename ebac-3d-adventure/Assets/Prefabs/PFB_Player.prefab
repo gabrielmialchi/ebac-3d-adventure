@@ -288,6 +288,7 @@ GameObject:
   - component: {fileID: 8228478652002243259}
   - component: {fileID: 8228478652002243257}
   - component: {fileID: 307902671040784258}
+  - component: {fileID: 1165485592}
   m_Layer: 0
   m_Name: PFB_Player
   m_TagString: Player
@@ -326,6 +327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterController: {fileID: 8228478652002243259}
   animator: {fileID: 1289407835399248782}
+  health: {fileID: 1165485592}
   speed: 25
   turnSpeed: 300
   gravity: 98
@@ -337,6 +339,9 @@ MonoBehaviour:
   - {fileID: 3898778373226204845}
   - {fileID: 3895900143606827731}
   - {fileID: 7139027951548267568}
+  colliders:
+  - {fileID: 8228478652002243259}
+  - {fileID: 307902671040784258}
 --- !u!143 &8228478652002243259
 CharacterController:
   m_ObjectHideFlags: 0
@@ -388,6 +393,23 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &1165485592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8228478652002243261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db057a7dfcd4bb14da4dd3a897ecb3b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentLife: 0
+  startLife: 10
+  maxLife: 100
+  destroyOnKill: 0
+  _delayToDestroy: 1
 --- !u!1001 &8228478652589850083
 PrefabInstance:
   m_ObjectHideFlags: 0

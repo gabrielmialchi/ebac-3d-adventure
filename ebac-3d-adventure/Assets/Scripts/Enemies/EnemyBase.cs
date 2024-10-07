@@ -117,7 +117,7 @@ namespace Enemy
 
             if (player != null)
             {
-                player.Damage(1);
+                player.health.Damage(1);
             }
         }
 
