@@ -63,12 +63,10 @@ public class PlayerAbilityShoot : PlayerAbilityBase
     private void StartShoot()
     {
         _currentGun.StartShoot();
-        //Debug.Log("Start Shoot");
     }
 
     private void CancelShoot()
     {
-        //Debug.Log("Cancel Shoot");
         _currentGun.StopShoot();
     }
 }

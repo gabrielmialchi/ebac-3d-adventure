@@ -1,14 +1,23 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.Rendering.PostProcessing;
+using Ebac.Core.Singleton;
 
-public class FXManager : MonoBehaviour
+public class FXManager : Singleton<FXManager>
 {
     public PostProcessVolume processVolume;
+
     [SerializeField] private Vignette _vignette;
+
+    public float duration = 2f;
 
     [NaughtyAttributes.Button]
     public void ChangeVignette()
+    {
+        StartCoroutine(FlashColorVignette());
+    }
+
+    IEnumerator FlashColorVignette()
     {
         Vignette tmp;
 
@@ -18,9 +27,28 @@ public class FXManager : MonoBehaviour
         }
 
         ColorParameter c = new ColorParameter();
+        FloatParameter f = new FloatParameter();
 
-        c.value = Color.red;
+        float time = 0;
+        while (time < duration)
+        {
+            c.value = Color.Lerp(Color.grey, Color.red, time / duration);
+            f.value = Mathf.Lerp(0.6f, 0.3f, time/duration);
+            time += Time.deltaTime;
+            _vignette.color.Override(c);
+            _vignette.intensity.Override(f);
+            yield return new WaitForEndOfFrame();
+        }
 
-        _vignette.color = c;
+        time = 0;
+        while (time < duration)
+        {
+            c.value = Color.Lerp(Color.red, Color.grey, time / duration);
+            f.value = Mathf.Lerp(0.3f, 0.6f, time / duration);
+            time += Time.deltaTime;
+            _vignette.color.Override(c);
+            _vignette.intensity.Override(f);
+            yield return new WaitForEndOfFrame();
+        }
     }
 }

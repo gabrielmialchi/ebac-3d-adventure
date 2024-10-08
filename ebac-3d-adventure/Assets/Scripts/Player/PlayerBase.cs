@@ -15,10 +15,11 @@ public class PlayerBase : MonoBehaviour//, IDamageable
     public float jumpSpeed = 15f;
     public float timeToRevive = 3f;
 
+    [Header("Controls")]
     public KeyCode jumpKeyCode = KeyCode.Space;
+    public KeyCode runKeyCode = KeyCode.LeftShift;
 
     [Header("Run Setup")]
-    public KeyCode runKeyCode = KeyCode.LeftShift;
     public float runSpeed = 1.5f;
 
     [Header("Damage")]
@@ -97,6 +98,7 @@ public class PlayerBase : MonoBehaviour//, IDamageable
     public void Damage(HealthBase h)
     {
         flashColors.ForEach(i => i.Flash());
+        FXManager.Instance.ChangeVignette();
     }
 
     public void Damage(int damage, Vector3 direction)

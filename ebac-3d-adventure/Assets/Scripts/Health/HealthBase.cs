@@ -59,6 +59,8 @@ public class HealthBase : MonoBehaviour, IDamageable
         }
         UpdateUI();
         OnDamageAction?.Invoke(this);
+        ScreenShake.Instance.Shake();
+
     }
 
     public void Damage(int damage, Vector3 direction)
