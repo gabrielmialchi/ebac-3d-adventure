@@ -332,6 +332,7 @@ MonoBehaviour:
   turnSpeed: 300
   gravity: 98
   jumpSpeed: 30
+  timeToRevive: 3
   jumpKeyCode: 32
   runKeyCode: 304
   runSpeed: 1.5
@@ -405,7 +406,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db057a7dfcd4bb14da4dd3a897ecb3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentLife: 0
+  uiHealthUpdater:
+  - {fileID: 0}
+  - {fileID: 0}
+  _currentLife: 10
   startLife: 10
   maxLife: 100
   destroyOnKill: 0

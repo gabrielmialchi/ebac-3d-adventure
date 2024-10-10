@@ -34,25 +34,28 @@ namespace Items
             itemSetups.Find(i => i.itemType == itemType).soInt.value += amount;
         }
 
-        public void RemoveByType(ItemType itemType, int amount = -1)
+        public void RemoveByType(ItemType itemType, int amount = 1)
         {
-            if (amount > 0) return;
-
             var item = itemSetups.Find(i => i.itemType == itemType);
             item.soInt.value -= amount;
 
             if (item.soInt.value < 0) item.soInt.value = 0;
         }
 
+        public ItemSetup GetItemByType(ItemType itemType)
+        {
+            return itemSetups.Find(i => i.itemType == itemType);
+        }
+
 
         [NaughtyAttributes.Button]
-        private void AddCoins()
+        private void DebugAddCoins()
         {
             AddByType(ItemType.COIN);
         }
 
         [NaughtyAttributes.Button]
-        private void AddLifePack()
+        private void DebugAddLifePack()
         {
             AddByType(ItemType.LIFE_PACK);
         }

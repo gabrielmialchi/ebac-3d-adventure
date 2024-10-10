@@ -1,7 +1,4 @@
-using Animation;
-using DG.Tweening;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,6 +30,7 @@ public class HealthBase : MonoBehaviour, IDamageable
     public virtual void ResetLife()
     {
         _currentLife = startLife;
+        UpdateUI();
     }
 
     public virtual void Kill()

@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Ebac.Core.Singleton;
 
-public class PlayerBase : MonoBehaviour//, IDamageable
+public class PlayerBase : Singleton<PlayerBase> //, IDamageable
 {
     //references
     public CharacterController characterController;
@@ -36,8 +37,9 @@ public class PlayerBase : MonoBehaviour//, IDamageable
         if (health == null) health = GetComponent<HealthBase>();
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         OnValidate();
 
         health.OnDamageAction += Damage;
