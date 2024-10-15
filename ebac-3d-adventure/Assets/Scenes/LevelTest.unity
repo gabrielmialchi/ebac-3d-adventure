@@ -5599,18 +5599,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PFB_ChestItemCoin
       objectReference: {fileID: 0}
-    - target: {fileID: 3865974906999746193, guid: 0eee9e182de897b4981f15594a758e86, type: 3}
-      propertyPath: coinPrefab
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3865974906999746193, guid: 0eee9e182de897b4981f15594a758e86, type: 3}
-      propertyPath: randomRange.x
-      value: -4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3865974906999746193, guid: 0eee9e182de897b4981f15594a758e86, type: 3}
-      propertyPath: randomRange.y
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 3865974906999746194, guid: 0eee9e182de897b4981f15594a758e86, type: 3}
       propertyPath: m_RootOrder
       value: 3
