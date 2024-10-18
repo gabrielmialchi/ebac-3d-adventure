@@ -1,14 +1,26 @@
 using UnityEngine;
 using DG.Tweening;
+using System.Collections;
 
 public class DestructableItemBase : MonoBehaviour
 {
+    [Header("Shake Settings")]
     public HealthBase health;
 
-    [Header("Shake Settings")]
-    public float duration = .1f;
-    public int vibrato = 5;
-    public Vector3 strenght = Vector3.up;
+    public float shakeDuration = .1f;
+    public int shakeForce = 5;
+
+    public Vector3 shakeStrenght = Vector3.up;
+
+    [Space]
+    [Header("Drop Coins Settings")]
+    public GameObject coinPhysicsPrefab;
+    public Transform dropPosition;
+
+    public int dropCoinsAmount;
+    public float dropAnimDuration;
+
+    public Ease dropAnimEase = Ease.OutBack;
 
     private void OnValidate()
     {
@@ -23,6 +35,30 @@ public class DestructableItemBase : MonoBehaviour
 
     private void OnDamageAction(HealthBase h)
     {
-        transform.DOShakeScale(duration, strenght, vibrato);
+        transform.DOShakeScale(shakeDuration, shakeStrenght, shakeForce);
+        DropCoinsAmount();
+    }
+
+    private void DropCoins()
+    {
+        var i = Instantiate(coinPhysicsPrefab);
+        i.transform.position = dropPosition.position;
+        i.transform.DOScale(0, dropAnimDuration).SetEase(dropAnimEase).From();
+    }
+
+    [NaughtyAttributes.Button]
+    private void DropCoinsAmount()
+    {
+
+        StartCoroutine(DropCoinsCoroutine());
+    }
+
+    IEnumerator DropCoinsCoroutine()
+    {
+        for (int i = 0; i < dropCoinsAmount; i++)
+        {
+            DropCoins();
+            yield return new WaitForSeconds(.1f);
+        }
     }
 }
