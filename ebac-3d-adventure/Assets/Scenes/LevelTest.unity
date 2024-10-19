@@ -560,6 +560,63 @@ MonoBehaviour:
   amplitude: 3
   frequency: 10
   time: 0.3
+--- !u!1001 &170509426
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5124688441403977664, guid: 7be52710a99060145a0d8423f2a07ef9, type: 3}
+      propertyPath: m_RootOrder
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124688441403977664, guid: 7be52710a99060145a0d8423f2a07ef9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124688441403977664, guid: 7be52710a99060145a0d8423f2a07ef9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124688441403977664, guid: 7be52710a99060145a0d8423f2a07ef9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124688441403977664, guid: 7be52710a99060145a0d8423f2a07ef9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124688441403977664, guid: 7be52710a99060145a0d8423f2a07ef9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124688441403977664, guid: 7be52710a99060145a0d8423f2a07ef9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124688441403977664, guid: 7be52710a99060145a0d8423f2a07ef9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124688441403977664, guid: 7be52710a99060145a0d8423f2a07ef9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124688441403977664, guid: 7be52710a99060145a0d8423f2a07ef9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124688441403977664, guid: 7be52710a99060145a0d8423f2a07ef9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124688441403977667, guid: 7be52710a99060145a0d8423f2a07ef9, type: 3}
+      propertyPath: m_Name
+      value: PFB_CoinPhysics
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7be52710a99060145a0d8423f2a07ef9, type: 3}
 --- !u!1001 &172860124
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1212,10 +1269,10 @@ RectTransform:
   m_Father: {fileID: 1790936118}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -199.54822, y: -125.64822}
-  m_SizeDelta: {x: 114.2458, y: 77.7122}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 112, y: 73.856}
+  m_SizeDelta: {x: 114.24579, y: 77.71219}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &304838588
 MonoBehaviour:

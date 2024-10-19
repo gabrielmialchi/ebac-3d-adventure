@@ -19,6 +19,7 @@ public class DestructableItemBase : MonoBehaviour
 
     public int dropCoinsAmount;
     public float dropAnimDuration;
+    public float dropSpawnTime;
 
     public Ease dropAnimEase = Ease.OutBack;
 
@@ -58,7 +59,7 @@ public class DestructableItemBase : MonoBehaviour
         for (int i = 0; i < dropCoinsAmount; i++)
         {
             DropCoins();
-            yield return new WaitForSeconds(.1f);
+            yield return new WaitForSeconds(dropSpawnTime);
         }
     }
 }

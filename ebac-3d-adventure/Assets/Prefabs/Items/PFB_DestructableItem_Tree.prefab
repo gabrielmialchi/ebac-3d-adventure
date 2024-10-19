@@ -85,6 +85,7 @@ MonoBehaviour:
   dropPosition: {fileID: 1969715166}
   dropCoinsAmount: 5
   dropAnimDuration: 0.2
+  dropSpawnTime: 0.5
   dropAnimEase: 27
 --- !u!114 &6402478381339581716
 MonoBehaviour:

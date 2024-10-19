@@ -46,6 +46,7 @@ namespace Items
             if (audioSource != null) audioSource.Play();
 
             ItemManager.Instance.AddByType(itemType);
+            Destroy(gameObject);
         }
     }
 }

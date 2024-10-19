@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5124688441403977664}
-  - component: {fileID: 5124688441403977665}
   - component: {fileID: 6356373099078115403}
+  - component: {fileID: 5124688441403977665}
   - component: {fileID: 5130857776221264864}
   - component: {fileID: 8577802159362974060}
   m_Layer: 0
@@ -35,19 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &5124688441403977665
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5124688441403977667}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2.3
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6356373099078115403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,9 +51,22 @@ MonoBehaviour:
   graphicItem: {fileID: 5467340456890377675}
   particleSystems: {fileID: 0}
   compareTag: Player
-  timeToHide: 3
+  timeToHide: 0
   audioSource: {fileID: 0}
-  collider: {fileID: 5124688441403977665}
+  coinCollider: {fileID: 5124688441403977665}
+--- !u!135 &5124688441403977665
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5124688441403977667}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5130857776221264864
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -75,9 +75,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5124688441403977667}
   serializedVersion: 2
-  m_Mass: 0.5
+  m_Mass: 1e+9
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
