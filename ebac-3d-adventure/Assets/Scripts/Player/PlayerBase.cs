@@ -1,6 +1,8 @@
-using System.Collections.Generic;
 using UnityEngine;
 using Ebac.Core.Singleton;
+using System.Collections.Generic;
+using System.Collections;
+using Cloth;
 
 public class PlayerBase : Singleton<PlayerBase> //, IDamageable
 {
@@ -27,6 +29,8 @@ public class PlayerBase : Singleton<PlayerBase> //, IDamageable
     public List<FlashColor> flashColors;
     public List<Collider> colliders;
 
+    [Header("Clothes")]
+    [SerializeField] private ClothChanger _clothChanger;
 
     //privates
     private float vSpeed = 0f;
@@ -137,5 +141,30 @@ public class PlayerBase : Singleton<PlayerBase> //, IDamageable
         {
             transform.position = CheckpointManager.Instance.GetLastCheckpointRespawnPosition();
         }
+    }
+
+    public void ChangeSpeed(float speed, float duration)
+    {
+        StartCoroutine(ChangeSpeedCoroutine(speed, duration));
+    }
+
+    IEnumerator ChangeSpeedCoroutine(float localSpeed, float duration)
+    {
+        var defaultSpeed = speed;
+        speed = localSpeed;
+        yield return new WaitForSeconds(duration);
+        speed = defaultSpeed;
+    }
+
+    public void ChangeTexture(ClothSetup setup, float duration)
+    {
+        StartCoroutine(ChangeTextureCoroutine(setup, duration));
+    }
+
+    IEnumerator ChangeTextureCoroutine(ClothSetup setup, float duration)
+    {
+        _clothChanger.ChangeTexture(setup);
+        yield return new WaitForSeconds(duration);
+        _clothChanger.ResetTexture();
     }
 }

@@ -1,4 +1,6 @@
+using Cloth;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +18,8 @@ public class HealthBase : MonoBehaviour, IDamageable
 
     public Action<HealthBase> OnDamageAction;
     public Action<HealthBase> OnKillAction;
+
+    public int damageDivider = 2;
 
     private void Awake()
     {
@@ -49,7 +53,7 @@ public class HealthBase : MonoBehaviour, IDamageable
 
     public void Damage(int damage)
     {
-        _currentLife -= damage;
+        _currentLife -= damage / damageDivider;
 
         if (_currentLife <= 0)
         {
@@ -68,9 +72,22 @@ public class HealthBase : MonoBehaviour, IDamageable
 
     private void UpdateUI()
     {
-        if(uiHealthUpdater != null)
+        if (uiHealthUpdater != null)
         {
-            uiHealthUpdater.ForEach(i => i.UpdateValue((float) _currentLife/startLife));
+            uiHealthUpdater.ForEach(i => i.UpdateValue((float)_currentLife / startLife));
         }
     }
+
+    public void ChangeDamageMultiplier(int damage, float duration)
+    {
+        StartCoroutine(ChangeCamageMultiplierCoroutine((int)damageDivider, duration));
+    }
+
+    IEnumerator ChangeCamageMultiplierCoroutine(int divider, float duration)
+    {
+        damageDivider = divider;
+        yield return new WaitForSeconds(duration);
+        damageDivider = 1;
+    }
+
 }

@@ -16,8 +16,9 @@ namespace Enemy
 
         public int startLife = 10;
         public int maxLife = 100;
-
         public int _currentLife;
+
+        public int damage = 2;
 
         public bool lookAtPlayer = false;
 
@@ -117,7 +118,7 @@ namespace Enemy
 
             if (player != null)
             {
-                player.health.Damage(1);
+                player.health.Damage(damage);
             }
         }
 
