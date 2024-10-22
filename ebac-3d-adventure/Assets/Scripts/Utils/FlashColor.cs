@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -11,10 +9,13 @@ public class FlashColor : MonoBehaviour
     [Header("Setup")]
     [SerializeField] private Color takeDamageColor = Color.red;
     [SerializeField] private float flashDuration = .2f;
+    [Space]
     [SerializeField] private LoopType loopType = LoopType.Yoyo;
     [SerializeField] private int loops = 2;
 
     private Tween _currentTween;
+    [Space]
+    public string colorParameter = "_EmissionColor";
 
     private void OnValidate()
     {
@@ -26,9 +27,9 @@ public class FlashColor : MonoBehaviour
     public void Flash()
     {
         if (meshRenderer != null && !_currentTween.IsActive())
-            _currentTween = meshRenderer.material.DOColor(takeDamageColor, "_EmissionColor", flashDuration).SetLoops(loops, loopType);
+            _currentTween = meshRenderer.material.DOColor(takeDamageColor, colorParameter, flashDuration).SetLoops(loops, loopType);
 
         if (skinnedMeshRenderer != null && !_currentTween.IsActive())
-            _currentTween = skinnedMeshRenderer.material.DOColor(takeDamageColor, "_EmissionColor", flashDuration).SetLoops(loops, loopType);
+            _currentTween = skinnedMeshRenderer.material.DOColor(takeDamageColor, colorParameter, flashDuration).SetLoops(loops, loopType);
     }
 }

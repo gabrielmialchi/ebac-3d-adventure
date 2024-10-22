@@ -12,6 +12,7 @@ public class PlayerAbilityShoot : PlayerAbilityBase
 
     public GunBase gunBase;
     public Transform gunPosition;
+    public FlashColor flashColor;
 
     private GunBase _currentGun;
 
@@ -63,6 +64,7 @@ public class PlayerAbilityShoot : PlayerAbilityBase
     private void StartShoot()
     {
         _currentGun.StartShoot();
+        flashColor?.Flash();
     }
 
     private void CancelShoot()

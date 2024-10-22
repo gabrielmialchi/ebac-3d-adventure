@@ -35,6 +35,7 @@ public class PlayerBase : Singleton<PlayerBase> //, IDamageable
     //privates
     private float vSpeed = 0f;
     private bool _isAlive = true;
+    private bool _isJumping = true;
 
     private void OnValidate()
     {
@@ -59,10 +60,21 @@ public class PlayerBase : Singleton<PlayerBase> //, IDamageable
 
         if (characterController.isGrounded)
         {
+            if (_isJumping)
+            {
+                _isJumping = false;
+                animator.SetTrigger("Land");
+            }
             vSpeed = 0;
+
             if (Input.GetKeyDown(jumpKeyCode))
             {
                 vSpeed = jumpSpeed;
+                if (!_isJumping)
+                {
+                    _isJumping = true;
+                    animator.SetTrigger("Jump");
+                }
             }
         }
 
