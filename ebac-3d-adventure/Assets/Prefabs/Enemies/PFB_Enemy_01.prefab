@@ -86,11 +86,13 @@ MonoBehaviour:
   startLife: 10
   maxLife: 100
   _currentLife: 0
+  damage: 2
+  lookAtPlayer: 0
   _animationBase: {fileID: 6421828143660738202}
   spawnAnimationDuration: 0.2
   spawnAnimationEase: 27
   startWithSpawnAnimation: 1
-  _delayToDestroy: 3
+  _delayToDestroy: 1.5
 --- !u!136 &4300936648595177932
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -792,7 +792,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 153905448}
-  m_LocalRotation: {x: 0.21452343, y: 0.000000008402899, z: -0.0000000018455861, w: 0.97671884}
+  m_LocalRotation: {x: 0.21452343, y: -0.000000008402899, z: 0.0000000018455861, w: 0.97671884}
   m_LocalPosition: {x: -1.7621372, y: 4.252607, z: -8.306394}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -816,6 +816,71 @@ MonoBehaviour:
   amplitude: 3
   frequency: 10
   time: 0.3
+--- !u!1 &162327168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 162327171}
+  - component: {fileID: 162327170}
+  - component: {fileID: 162327169}
+  m_Layer: 0
+  m_Name: ItemClothShield (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &162327169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162327168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac68d9059a447ab4d9c9de1686f7a27d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clothType: 2
+  graphicItem: {fileID: 1248903364}
+  timeToHide: 0.1
+  clothTextureDuration: 5
+  compareTag: Player
+  targetShield: 2
+  clothShieldDuration: 5
+--- !u!65 &162327170
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162327168}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 2.5, z: 2.5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &162327171
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162327168}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -57.69, y: -4.6, z: 18.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1248903367}
+  m_Father: {fileID: 0}
+  m_RootOrder: 43
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &170509426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1433,8 +1498,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
   m_PivotOffset: {x: 0, y: 0, z: 0}
-  m_AmplitudeGain: 3
-  m_FrequencyGain: 10
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 0
   mNoiseOffsets: {x: 399.30414, y: 767.86926, z: -261.0203}
 --- !u!1001 &275010810
 PrefabInstance:
@@ -1600,8 +1665,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 708fcbe538467f741bca07a50b04dd7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodyMesh: {fileID: 447069719}
-  texture: {fileID: 2800000, guid: 718a5008738f5cd4b9638e4dee329268, type: 3}
+  mesh: {fileID: 447069719}
+  texture: {fileID: 0}
   shaderIdName: _EmissionMap
 --- !u!1001 &367834629
 PrefabInstance:
@@ -1991,6 +2056,10 @@ PrefabInstance:
       propertyPath: uiGunUpdater
       value: 
       objectReference: {fileID: 1219763145}
+    - target: {fileID: 1165485592, guid: 8cbc6ada0015f964cbfe298179d16d96, type: 3}
+      propertyPath: _clothChanger
+      value: 
+      objectReference: {fileID: 345437005}
     - target: {fileID: 1165485592, guid: 8cbc6ada0015f964cbfe298179d16d96, type: 3}
       propertyPath: uiHealthUpdater
       value: 
@@ -3865,6 +3934,87 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1248903364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1248903367}
+  - component: {fileID: 1248903366}
+  - component: {fileID: 1248903365}
+  m_Layer: 0
+  m_Name: Model
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &1248903365
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248903364}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31c9eaa517e62684b8bf28bb3d1fc93e, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1248903366
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248903364}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1248903367
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248903364}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 162327171}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1268801899
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5264,7 +5414,7 @@ MonoBehaviour:
   timeToHide: 0.1
   clothTextureDuration: 5
   compareTag: Player
-  targetShield: 1
+  targetShield: 2
   clothShieldDuration: 5
 --- !u!65 &1745350676
 BoxCollider:
@@ -5287,7 +5437,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1745350674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -67.3, y: -5.09, z: 20.09}
+  m_LocalPosition: {x: 21.24, y: 7.84, z: 12.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 145940112}

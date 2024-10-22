@@ -7,6 +7,7 @@ using UnityEngine;
 public class HealthBase : MonoBehaviour, IDamageable
 {
     public List<UIFillUpdater> uiHealthUpdater;
+    [SerializeField] private ClothChanger _clothChanger;
 
     public int _currentLife;
     public int startLife = 10;
@@ -78,16 +79,28 @@ public class HealthBase : MonoBehaviour, IDamageable
         }
     }
 
-    public void ChangeDamageMultiplier(int damage, float duration)
+    public void ChangeDamageDivider(int damageDivider, float duration)
     {
-        StartCoroutine(ChangeCamageMultiplierCoroutine((int)damageDivider, duration));
+        StartCoroutine(ChangeDamageDividerCoroutine(damageDivider, duration));
     }
 
-    IEnumerator ChangeCamageMultiplierCoroutine(int divider, float duration)
+    IEnumerator ChangeDamageDividerCoroutine(int divider, float duration)
     {
         damageDivider = divider;
         yield return new WaitForSeconds(duration);
         damageDivider = 1;
+    }
+
+    public void ChangeTexture(ClothSetup setup, float duration)
+    {
+        StartCoroutine(ChangeTextureCoroutine(setup, duration));
+    }
+
+    IEnumerator ChangeTextureCoroutine(ClothSetup setup, float duration)
+    {
+        _clothChanger.ChangeTexture(setup);
+        yield return new WaitForSeconds(duration);
+        _clothChanger.ResetTexture();
     }
 
 }
