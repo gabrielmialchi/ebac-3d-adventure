@@ -146,7 +146,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.17
+  m_Radius: 2.6
   m_Height: 3.54
   m_Direction: 1
   m_Center: {x: 0.22, y: 2.02, z: 0}
@@ -227,11 +227,14 @@ MonoBehaviour:
   _currentLife: 0
   damage: 2
   lookAtPlayer: 1
-  _animationBase: {fileID: 3484512057090591584}
   spawnAnimationDuration: 0.2
   spawnAnimationEase: 27
   startWithSpawnAnimation: 1
+  _animationBase: {fileID: 3484512057090591584}
   _delayToDestroy: 3
+  OnKillEvent:
+    m_PersistentCalls:
+      m_Calls: []
   gunbase: {fileID: 8924393681024281084}
   player: {fileID: 0}
   attackAreaCollider: {fileID: 952344769977097714}

@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using DG.Tweening;
 using Animation;
 
@@ -8,31 +7,44 @@ namespace Enemy
 {
     public class EnemyBase : MonoBehaviour, IDamageable
     {
+        //Public References
+        [Header("Components")]
         public Collider enemyCollider;
-
         public FlashColor flashColor;
-
         public ParticleSystem damageParticleSystem;
+        [Space]
 
+        //Public Variables
+        [Header("Health")]
         public int startLife = 10;
         public int maxLife = 100;
         public int _currentLife;
+        [Space]
 
+        [Header("Damage")]
         public int damage = 2;
-
         public bool lookAtPlayer = false;
-
-        [Header("Animation")]
-        [SerializeField] private AnimationBase _animationBase;
+        [Space]
 
         [Header("Spawn Animation")]
         public float spawnAnimationDuration = .2f;
         public Ease spawnAnimationEase = Ease.OutBack;
         public bool startWithSpawnAnimation = true;
+        [Space]
 
-        [SerializeField] private float _delayToDestroy = 3f;
-
+        //Private References
+        [Header("Animation")]
+        [SerializeField] private AnimationBase _animationBase;
         private PlayerBase _player;
+
+        //Private Variables
+        [SerializeField] private float _delayToDestroy = 1f;
+        [Space]
+
+        //Events
+        [Header("Events")]
+        public UnityEvent OnKillEvent;
+        //[Space]
 
         private void Awake()
         {
@@ -65,6 +77,7 @@ namespace Enemy
             if (enemyCollider != null) enemyCollider.enabled = false;
             Destroy(gameObject, _delayToDestroy);
             PlayAnimationByTrigger(AnimationType.DEATH);
+            OnKillEvent?.Invoke();
         }
 
         public void OnDamage(int damage)

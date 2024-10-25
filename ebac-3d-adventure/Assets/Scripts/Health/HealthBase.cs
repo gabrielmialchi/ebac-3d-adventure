@@ -22,6 +22,8 @@ public class HealthBase : MonoBehaviour, IDamageable
 
     public int damageDivider = 2;
 
+    public int CurrentLife => _currentLife;
+
     private void Awake()
     {
         Init();
