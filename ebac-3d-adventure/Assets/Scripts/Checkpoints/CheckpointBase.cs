@@ -18,6 +18,7 @@ public class CheckpointBase : MonoBehaviour
         if (!checkpointActivated && other.CompareTag("Player"))
         {
             CheckCheckpoint();
+            SaveManager.Instance.SaveLastLevel(SaveManager.Instance.lastLevel);
         }
     }
 

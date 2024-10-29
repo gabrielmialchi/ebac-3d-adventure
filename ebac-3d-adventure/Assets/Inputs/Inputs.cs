@@ -41,6 +41,14 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""OpenMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""b050e07b-310f-47ee-b17d-bc71c65652ef"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -76,6 +84,17 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""action"": ""GunAngle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""460efce3-d02c-449e-8f6c-ca39f7ffdef3"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -87,6 +106,7 @@ public class @Inputs : IInputActionCollection, IDisposable
         m_Gameplay_Shoot = m_Gameplay.FindAction("Shoot", throwIfNotFound: true);
         m_Gameplay_GunShootLimit = m_Gameplay.FindAction("GunShootLimit", throwIfNotFound: true);
         m_Gameplay_GunAngle = m_Gameplay.FindAction("GunAngle", throwIfNotFound: true);
+        m_Gameplay_OpenMenu = m_Gameplay.FindAction("OpenMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -139,6 +159,7 @@ public class @Inputs : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Shoot;
     private readonly InputAction m_Gameplay_GunShootLimit;
     private readonly InputAction m_Gameplay_GunAngle;
+    private readonly InputAction m_Gameplay_OpenMenu;
     public struct GameplayActions
     {
         private @Inputs m_Wrapper;
@@ -146,6 +167,7 @@ public class @Inputs : IInputActionCollection, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Gameplay_Shoot;
         public InputAction @GunShootLimit => m_Wrapper.m_Gameplay_GunShootLimit;
         public InputAction @GunAngle => m_Wrapper.m_Gameplay_GunAngle;
+        public InputAction @OpenMenu => m_Wrapper.m_Gameplay_OpenMenu;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -164,6 +186,9 @@ public class @Inputs : IInputActionCollection, IDisposable
                 @GunAngle.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGunAngle;
                 @GunAngle.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGunAngle;
                 @GunAngle.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnGunAngle;
+                @OpenMenu.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenMenu;
+                @OpenMenu.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenMenu;
+                @OpenMenu.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenMenu;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -177,6 +202,9 @@ public class @Inputs : IInputActionCollection, IDisposable
                 @GunAngle.started += instance.OnGunAngle;
                 @GunAngle.performed += instance.OnGunAngle;
                 @GunAngle.canceled += instance.OnGunAngle;
+                @OpenMenu.started += instance.OnOpenMenu;
+                @OpenMenu.performed += instance.OnOpenMenu;
+                @OpenMenu.canceled += instance.OnOpenMenu;
             }
         }
     }
@@ -186,5 +214,6 @@ public class @Inputs : IInputActionCollection, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnGunShootLimit(InputAction.CallbackContext context);
         void OnGunAngle(InputAction.CallbackContext context);
+        void OnOpenMenu(InputAction.CallbackContext context);
     }
 }

@@ -1,24 +1,33 @@
 using System.IO;
 using UnityEngine;
 using Ebac.Core.Singleton;
+using System;
+using Cloth;
 
 public class SaveManager : Singleton<SaveManager>
 {
+    public int lastLevel;
+
+    public Action<SaveSetup> FileLoaded;
+
+    public SaveSetup Setup
+    {
+        get { return _saveSetup; }
+    }
 
     [Header("Debugger")]
-    private SaveSetup _saveSetup;
-    
+    [SerializeField] private SaveSetup _saveSetup;
+    private string _path = Application.streamingAssetsPath + "/save.txt";
 
     protected override void Awake()
     {
         base.Awake();
         DontDestroyOnLoad(this);
-        _saveSetup = new SaveSetup();
-        _saveSetup.lastLevel = 2;
-        _saveSetup.playerName = "PlayerTest";
-        _saveSetup.health = 50;
-        _saveSetup.coins = 0;
-        _saveSetup.lifePack = 0;
+    }
+
+    private void Start()
+    {
+        Invoke(nameof(Load), .1f);
     }
 
     #region SAVE
@@ -34,7 +43,9 @@ public class SaveManager : Singleton<SaveManager>
     {
         _saveSetup.lastLevel = level;
         SaveItems();
-        //SaveHealth();
+        SaveHealth();
+        SaveCheckpointKey();
+        SaveClothSetup();
         Save();
     }
 
@@ -51,35 +62,54 @@ public class SaveManager : Singleton<SaveManager>
         Save();
     }
 
-    //private void SaveHealth()
-    //{
-    //    _saveSetup.health = PlayerBase.Instance.health._currentLife;
-    //    Save();
-    //}
+    private void SaveHealth()
+    {
+        _saveSetup.health = PlayerBase.Instance.health._currentLife;
+        Save();
+    }
+
+    private void SaveCheckpointKey()
+    {
+        _saveSetup.checkpointKey = CheckpointManager.Instance.lastCheckpointKey;
+    }
+
+    private void SaveClothSetup()
+    {
+        _saveSetup.clothSetup = ClothManager.Instance.clothSetups[0];
+    }
 
     private void SaveFile(string json)
     {
-        string path = Application.streamingAssetsPath + "/save.txt";
+        File.WriteAllText(_path, json);
+    }
 
-        //string fileLoaded = "";
+    private void CreateNewSave()
+    {
+        _saveSetup = new SaveSetup();
+        _saveSetup.lastLevel = 0;
+        _saveSetup.playerName = "PlayerName";
+    }
 
-        //if (File.Exists(path)) fileLoaded = File.ReadAllText(path);
+    [NaughtyAttributes.Button]
+    public void Load()
+    {
+        string fileLoaded = "";
 
-        File.WriteAllText(path, json);
+        if (File.Exists(_path))
+        {
+            fileLoaded = File.ReadAllText(_path);
+            _saveSetup = JsonUtility.FromJson<SaveSetup>(fileLoaded);
+            lastLevel = _saveSetup.lastLevel;
+        }
+        else
+        {
+            CreateNewSave();
+            Save();
+        }
+
+        FileLoaded.Invoke(_saveSetup);
     }
     #endregion
-
-    [NaughtyAttributes.Button]
-    private void SaveLevelOne()
-    {
-        SaveLastLevel(1);
-    }
-
-    [NaughtyAttributes.Button]
-    private void SaveLevelFive()
-    {
-        SaveLastLevel(5);
-    }
 }
 
 [System.Serializable]
@@ -91,4 +121,8 @@ public class SaveSetup
     public int coins;
     public int health;
     public int lifePack;
+
+    public int checkpointKey;
+
+    public ClothSetup clothSetup;
 }

@@ -18,6 +18,7 @@ namespace Items
         private void Start()
         {
             Reset();
+            LoadItemsFromSave();
         }
 
         private void Reset()
@@ -47,20 +48,23 @@ namespace Items
             return itemSetups.Find(i => i.itemType == itemType);
         }
 
-
-        [NaughtyAttributes.Button]
-        private void DebugAddCoins()
+        private void LoadItemsFromSave()
         {
-            AddByType(ItemType.COIN);
+            AddByType(ItemType.COIN, SaveManager.Instance.Setup.coins);
+            AddByType(ItemType.LIFE_PACK, SaveManager.Instance.Setup.lifePack);
         }
 
-        [NaughtyAttributes.Button]
-        private void DebugAddLifePack()
-        {
-            AddByType(ItemType.LIFE_PACK);
-        }
+        //[NaughtyAttributes.Button]
+        //private void DebugAddCoins()
+        //{
+        //    AddByType(ItemType.COIN);
+        //}
 
-
+        //[NaughtyAttributes.Button]
+        //private void DebugAddLifePack()
+        //{
+        //    AddByType(ItemType.LIFE_PACK);
+        //}
     }
 
     [System.Serializable]
