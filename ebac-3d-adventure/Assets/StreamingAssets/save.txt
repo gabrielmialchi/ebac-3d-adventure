@@ -3,8 +3,8 @@
     "playerName": "PlayerName",
     "coins": 12,
     "health": 50,
-    "lifePack": 0,
-    "checkpointKey": 1,
+    "lifePack": 6,
+    "checkpointKey": 0,
     "clothSetup": {
         "clothType": 0,
         "texture": {

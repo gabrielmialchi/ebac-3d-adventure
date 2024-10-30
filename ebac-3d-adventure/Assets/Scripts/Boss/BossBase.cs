@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ebac.StateMachine;
 using DG.Tweening;
+using UnityEngine.Events;
 //using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace Boss
@@ -39,6 +40,9 @@ namespace Boss
         public GunBase gunbase;
         public FlashColor flashColor;
         public ParticleSystem damageParticleSystem;
+
+        [Header("Events")]
+        public UnityEvent OnBossKillEvent;
 
         private StateMachine<BossAction> stateMachine;
 
@@ -76,6 +80,7 @@ namespace Boss
 
         private void OnBossKill(HealthBase hb)
         {
+            OnBossKillEvent?.Invoke();
             SwitchState(BossAction.DEATH);
         }
 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Events;
 
 public class EndGame : MonoBehaviour
 {
@@ -10,11 +11,15 @@ public class EndGame : MonoBehaviour
 
     private bool _endGame = false;
 
+    [Header("Events")]
+    public UnityEvent OnEndLevelEvent;
+
+
     private void Awake()
     {
         endGameObjects.ForEach(i => i.SetActive(false));
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {
         PlayerBase player = other.transform.GetComponent<PlayerBase>();
@@ -22,6 +27,7 @@ public class EndGame : MonoBehaviour
         if (!_endGame && player != null)
         {
             ShowEndGame();
+            OnEndLevelEvent?.Invoke();
         }
     }
 
