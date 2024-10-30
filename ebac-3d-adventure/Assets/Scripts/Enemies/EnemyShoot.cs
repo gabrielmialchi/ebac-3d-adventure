@@ -10,6 +10,9 @@ namespace Enemy
         public GameObject player;
         public SphereCollider attackAreaCollider;
 
+        [Header("Shoot Sound")]
+        public AudioClip attackClip;
+
         private bool _isPlayerInAttackRange = false;
 
         protected override void Init()

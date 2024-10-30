@@ -10,6 +10,7 @@ public class PlayerBase : Singleton<PlayerBase> //, IDamageable
     public CharacterController characterController;
     public Animator animator;
     public HealthBase health;
+    public AudioSource damageAS;
 
     //publics
     public float speed = 1f;
@@ -22,16 +23,23 @@ public class PlayerBase : Singleton<PlayerBase> //, IDamageable
     public KeyCode jumpKeyCode = KeyCode.Space;
     public KeyCode runKeyCode = KeyCode.LeftShift;
 
+    [Space]
     [Header("Run Setup")]
     public float runSpeed = 1.5f;
 
+    [Space]
     [Header("Damage")]
     public List<FlashColor> flashColors;
     public List<Collider> colliders;
 
+    [Space]
     [Header("Clothes")]
     [SerializeField] private ClothChanger _clothChanger;
 
+    [Space]
+    [Header("Sound")]
+    public AudioClip damageSound;
+    
     //privates
     private float vSpeed = 0f;
     private bool _isAlive = true;
@@ -115,6 +123,7 @@ public class PlayerBase : Singleton<PlayerBase> //, IDamageable
 
     public void Damage(HealthBase h)
     {
+        //damageAS.PlayOneShot(damageSound);
         flashColors.ForEach(i => i.Flash());
         FXManager.Instance.ChangeVignette();
     }

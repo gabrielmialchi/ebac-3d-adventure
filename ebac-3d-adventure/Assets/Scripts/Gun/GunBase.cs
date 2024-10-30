@@ -17,6 +17,10 @@ public class GunBase : MonoBehaviour
     private bool isShooting = false;
     private int _currentAmmo;
 
+    [Header("Sounds")]
+    public AudioSource gunAS;
+    public AudioClip shootSound;
+
     protected virtual IEnumerator ShootCoroutine()
     {
         while (isShooting)
@@ -29,6 +33,7 @@ public class GunBase : MonoBehaviour
     public virtual void Shoot()
     {
         var projectile = Instantiate(prefabProjectile);
+        gunAS.PlayOneShot(shootSound);
         projectile.transform.position = positionToShoot.position;
         projectile.transform.rotation = positionToShoot.rotation;
         projectile.projectileSpeed = speed;

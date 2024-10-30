@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 0
+  sfxType: 1
   graphicItem: {fileID: 8379478206393478329}
   particleSystems: {fileID: 0}
   compareTag: Player

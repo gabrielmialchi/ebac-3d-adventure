@@ -222,11 +222,14 @@ MonoBehaviour:
   enemyCollider: {fileID: 2114929219814560433}
   flashColor: {fileID: 7609654344441706805}
   damageParticleSystem: {fileID: 2833208262918135469}
+  enemyAS: {fileID: 0}
   startLife: 10
   maxLife: 100
   _currentLife: 0
   damage: 2
   lookAtPlayer: 1
+  damageSound: {fileID: 8300000, guid: 1127a8cc867d38f41ace76697f9a0ea9, type: 3}
+  crySound: {fileID: 8300000, guid: 997a760e706c34a419e17bd4bbfe255a, type: 3}
   spawnAnimationDuration: 0.2
   spawnAnimationEase: 27
   startWithSpawnAnimation: 1
@@ -301,6 +304,8 @@ MonoBehaviour:
   destroyOnKill: 1
   _delayToDestroy: 3
   damageDivider: 2
+  damageAS: {fileID: 0}
+  damageSound: {fileID: 0}
 --- !u!1 &8863092931425015689
 GameObject:
   m_ObjectHideFlags: 0

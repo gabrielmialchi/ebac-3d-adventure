@@ -10,6 +10,8 @@ public class PlayerAbilityShoot : PlayerAbilityBase
 
     public List<GunBase> listOfGuns;
 
+    public AudioClip shootSound;
+    public AudioSource shootAS;
     public GunBase gunBase;
     public Transform gunPosition;
     public FlashColor flashColor;
@@ -64,6 +66,7 @@ public class PlayerAbilityShoot : PlayerAbilityBase
     private void StartShoot()
     {
         _currentGun.StartShoot();
+        shootAS.PlayOneShot(shootSound);
         flashColor?.Flash();
     }
 

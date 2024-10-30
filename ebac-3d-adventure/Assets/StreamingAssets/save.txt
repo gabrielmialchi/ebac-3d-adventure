@@ -1,14 +1,14 @@
 {
     "lastLevel": 1,
     "playerName": "PlayerName",
-    "coins": 34,
+    "coins": 12,
     "health": 50,
     "lifePack": 0,
     "checkpointKey": 1,
     "clothSetup": {
         "clothType": 0,
         "texture": {
-            "instanceID": 18668
+            "instanceID": 18658
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Enemy
         public Collider enemyCollider;
         public FlashColor flashColor;
         public ParticleSystem damageParticleSystem;
+        public AudioSource enemyAS;
         [Space]
 
         //Public Variables
@@ -24,6 +25,12 @@ namespace Enemy
         [Header("Damage")]
         public int damage = 2;
         public bool lookAtPlayer = false;
+        [Space]
+
+        [Header("Sounds")]
+        public AudioClip damageSound;
+        public AudioClip crySound;
+        public AudioClip deathSound;
         [Space]
 
         [Header("Spawn Animation")]
@@ -60,6 +67,7 @@ namespace Enemy
         {
             ResetLife();
             if (startWithSpawnAnimation) SpawnAnimation();
+            enemyAS.Play();
         }
 
         protected virtual void ResetLife()
@@ -89,8 +97,11 @@ namespace Enemy
 
             _currentLife -= damage;
 
+            enemyAS.PlayOneShot(damageSound);
+
             if (_currentLife <= 0)
             {
+                enemyAS.PlayOneShot(deathSound);
                 Kill();
             }
         }

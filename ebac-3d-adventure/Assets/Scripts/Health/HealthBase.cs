@@ -24,6 +24,12 @@ public class HealthBase : MonoBehaviour, IDamageable
 
     public int CurrentLife => _currentLife;
 
+    [Space]
+    [Header("Sounds")]
+    public AudioSource damageAS;
+    public AudioClip damageSound;
+    public AudioClip healSound;
+
     private void Awake()
     {
         Init();
@@ -57,6 +63,7 @@ public class HealthBase : MonoBehaviour, IDamageable
     public void Damage(int damage)
     {
         _currentLife -= damage / damageDivider;
+        damageAS.PlayOneShot(damageSound);
 
         if (_currentLife <= 0)
         {

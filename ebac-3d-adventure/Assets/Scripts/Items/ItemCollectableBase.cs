@@ -5,6 +5,7 @@ namespace Items
     public class ItemCollectableBase : MonoBehaviour
     {
         public ItemType itemType;
+        public SFXType sfxType;
         
         public GameObject graphicItem;
         public ParticleSystem particleSystems;
@@ -28,8 +29,14 @@ namespace Items
             }
         }
 
+        private void PlaySFX()
+        {
+            SFXPool.Instance.Play(sfxType);
+        }
+
         protected virtual void Collect()
         {
+            PlaySFX();
             if (graphicItem != null) graphicItem.SetActive(false);
             Invoke("HideObject", timeToHide);
             OnCollect();

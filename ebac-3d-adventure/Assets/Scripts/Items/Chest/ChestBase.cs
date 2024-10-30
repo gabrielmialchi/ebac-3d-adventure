@@ -21,6 +21,10 @@ public class ChestBase : MonoBehaviour
     private bool _isChestOpened = false;
     private string triggerOpen = "Open";
 
+    [Space]
+    [Header("Sound")]
+    public AudioSource chestAS;
+
     private void Start()
     {
         startScale = notification.transform.localScale.x;
@@ -56,6 +60,7 @@ public class ChestBase : MonoBehaviour
     {
         if (_isChestOpened) return;
 
+        chestAS.Play();
         animator.SetTrigger(triggerOpen);
         _isChestOpened = true;
         HideNotification();
